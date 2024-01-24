@@ -12,6 +12,7 @@ body {
 .navbar {
 	position: fixed;
 	width: 100%;
+	z-index: 9999;
 	top: 0;
 	left: 0;
 	background-color: #ff8400;
@@ -84,19 +85,22 @@ form {
 	align-content: flex-start;
 	padding-top: 30px;
 	.card {
+		transition: all 0.3s;
 		width: 280px;
 		height: 480px;
 		background-color: rgb(255, 255, 255);
 		border-radius: 16px;
-		box-shadow: 1px 3px 28px -1px rgba(255, 132, 0, 0.75);
-		-webkit-box-shadow: 1px 3px 28px -1px rgba(255, 132, 0, 0.75);
-		-moz-box-shadow: 1px 3px 28px -1px rgba(255, 132, 0, 0.75);
+		margin: 20px 15px;
+		box-shadow: 1px 3px 28px -1px rgba(182, 94, 0, 0.75);
+		-webkit-box-shadow: 1px 3px 28px -1px rgba(182, 94, 0, 0.75);
+		-moz-box-shadow: 1px 3px 28px -1px rgba(182, 94, 0, 0.75);
 		overflow: hidden;
 		.image {
 			display: flex;
 			img {
 				width: 100%;
-				max-height: 250px;
+				max-height: 260px;
+
 			}
 		}
 		.info {
@@ -119,5 +123,8 @@ form {
 				font-size: 10px;
 			}
 		}
+	}
+	.card:hover {
+		scale: 1.07;
 	}
 }

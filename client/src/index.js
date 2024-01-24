@@ -7,11 +7,12 @@ import "./main.scss";
 import { Navbar } from "./components/Navbar";
 import Registro from "./pages/Registro";
 import { Catalogo } from "./pages/Catalogo";
+import { Simulador } from "./pages/Simulador";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<>
 		<BrowserRouter>
-		<Navbar />
+			<Navbar />
 			<Routes>
 				<Route
 					path="/"
@@ -24,6 +25,10 @@ root.render(
 				<Route
 					path="/Catalogo"
 					element={<Catalogo />}
+				/>
+				<Route
+					path="/Simulador/:_id"
+					element={<Simulador />}
 				/>
 			</Routes>
 		</BrowserRouter>

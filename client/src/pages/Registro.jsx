@@ -44,8 +44,13 @@ function Registro() {
 		caracteristicas,
 		image_url: Url,
 	};
-	const callFormHook = () => {
-		SendForm(form);
+	const callFormHook = async () => {
+		var res = await SendForm(form);
+		if (res.status == 200) {
+			window.alert("OK");
+		} else {
+			window.alert("ERROR " + res.status);
+		}
 	};
 
 	const cld = new Cloudinary({
