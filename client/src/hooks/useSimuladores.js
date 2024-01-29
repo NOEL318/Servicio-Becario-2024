@@ -1,5 +1,5 @@
 import axios from "axios";
-var url="http://localhost:5001";
+var url="";
 export const SendForm = (datos) => {
 	return axios.post(`${url}/api/post/newsimulador`, { data: datos });
 };
