@@ -17,17 +17,22 @@ export const Simulador = () => {
 	if (simulador)
 		return (
 			<>
-				<h1>{simulador.nombre_maquina}</h1>
-				<img
-					src={simulador.image_url}
-					alt=""
-				/>
-				<h1>{simulador.marca}</h1>
-				<h1>{simulador.modelo}</h1>
+				<div className="simulador">
+					<h1>{simulador.nombre_maquina}</h1>
+					<img
+						src={simulador.image_url}
+						alt=""
+					/>
+					<div className="text">
+						<h3>Marca: {simulador.marca}</h3>
+						<h3>Modelo: {simulador.modelo}</h3>
 
-				<h1>AF/{simulador.numero_activo_fijo}</h1>
-				<h1>Ubicación: {simulador.numero_activo_fijo}</h1>
+						<h4>No. Activo Fijo: AF/{simulador.numero_activo_fijo}</h4>
+						<h4>Ubicación: {simulador.ubicacion}</h4>
+					</div>
 
+					<p className="caracteristicas">{simulador.caracteristicas}</p>
+				</div>
 			</>
 		);
 };

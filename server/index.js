@@ -10,7 +10,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5001;
 
-app.use(express.static(path.resolve(__dirname, "../client/build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.get("/api/hi", async (req, res) => {
 	res.json({ message: "Hola desde el servidor!" });
@@ -34,7 +34,7 @@ app.post("/api/post/simulador", async (req, res) => {
 });
 
 app.get("*", (req, res) => {
-	res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+	res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 app.listen(PORT, () => {

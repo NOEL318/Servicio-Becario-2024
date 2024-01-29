@@ -84,6 +84,10 @@ form {
 	min-height: 100vh;
 	align-content: flex-start;
 	padding-top: 30px;
+	a {
+		text-decoration: none;
+		color: #000000;
+	}
 	.card {
 		transition: all 0.3s;
 		width: 280px;
@@ -100,7 +104,6 @@ form {
 			img {
 				width: 100%;
 				max-height: 260px;
-
 			}
 		}
 		.info {
@@ -126,5 +129,22 @@ form {
 	}
 	.card:hover {
 		scale: 1.07;
+		text-decoration: underline;
+	}
+}
+.simulador {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	img {
+		width: 50%;
+	}
+	.caracteristicas {
+		width: 50%;
+		text-align: justify;
+	}
+	.text {
+		width: 50%;
 	}
 }
