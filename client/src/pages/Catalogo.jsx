@@ -7,8 +7,8 @@ export const Catalogo = () => {
 	useEffect(() => {
 		const getData = async () => {
 			var { data } = await GetSimuladores();
-			setsimuladores(data.array);
-			console.log(data.array);
+			setsimuladores(data);
+			console.log(data);
 		};
 		getData();
 	}, []);
@@ -18,11 +18,11 @@ export const Catalogo = () => {
 			<>
 				<div className="cards">
 					{simuladores.map((simulador) => (
-						<Link to={`/Simulador/${simulador._id}`}>
-							<div
-								className="card"
-								key={simulador._id}
-							>
+						<Link
+							to={`/Simulador/${simulador._id}`}
+							key={simulador._id}
+						>
+							<div className="card">
 								<div className="image">
 									<img
 										src={simulador.image_url}

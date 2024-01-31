@@ -1,12 +1,17 @@
 body {
 	background-color: #ffffff;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	padding-top: 44px;
 }
 * {
 	font-family: "Montserrat", sans-serif !important;
+}
+.registro {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	width: 100%;
 }
 
 .navbar {
@@ -47,6 +52,7 @@ form {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	width: 500px;
 	input,
 	textarea {
 		max-width: 800px;
@@ -55,6 +61,9 @@ form {
 		padding: 15px 0px 15px 10px;
 		border-radius: 7px;
 		border: 2px solid #000000;
+	}
+	textarea {
+		height: 90px;
 	}
 	.send_button {
 		width: 100%;
@@ -67,10 +76,17 @@ form {
 	.cloudinary-button {
 		margin: 10px 5px;
 		padding: 15px 5px;
-		width: 100%;
+		width: calc(100% + 13px);
 		border: none;
 		border-radius: 7px;
 		background-color: #047700 !important;
+		transition: all 0.3s;
+	}
+	.cloudinary-button:hover {
+		scale: 1.03;
+	}
+	.image_form {
+		width: 200px;
 	}
 }
 
@@ -140,11 +156,87 @@ form {
 	img {
 		width: 50%;
 	}
+	.buttons {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+	}
+	.delete_button {
+		width: 64px;
+		height: 50px;
+		border: none;
+		border-radius: 7px;
+		background-color: #ff5141;
+		color: #ffffff;
+		margin: 10px;
+	}
+	.clone_button {
+		width: 64px;
+		height: 50px;
+		border: none;
+		border-radius: 7px;
+		background-color: #056300;
+		color: #ffffff;
+		margin: 10px;
+	}
 	.caracteristicas {
 		width: 50%;
 		text-align: justify;
 	}
 	.text {
 		width: 50%;
+	}
+}
+
+.modal {
+	background-color: rgba(35, 35, 35, 0.674);
+	backdrop-filter: blur(4px);
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	margin-top: -44px;
+	flex-wrap: nowrap;
+	min-height: 100vh;
+	box-shadow: 0px 1px 24px 1px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 0px 1px 24px 1px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 1px 24px 1px rgba(0, 0, 0, 0.75);
+	justify-content: center;
+	position: fixed;
+	.header {
+		background-color: #ffffff;
+		border-radius: 16px 16px 0 0;
+		width: 500px;
+		padding: 10px 10px 0 30px;
+		height: 45px;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		align-content: center;
+		.button {
+			background-color: transparent;
+			border: none;
+			padding: 3px;
+			transition: all 0.3s;
+			width: 40px;
+			height: 40px;
+		}
+		.button:hover {
+			scale: 1.09;
+		}
+	}
+	.form {
+		h1 {
+			margin-top: 0;
+		}
+		z-index: 90;
+		padding: 0 20px;
+		position: relative;
+		background-color: #ffffff;
+		border-radius: 0 0 16px 16px;
+	}
+	& {
+		width: 100%;
 	}
 }

@@ -62,7 +62,7 @@ function Registro() {
 	const myImage = cld.image(publicId);
 
 	return (
-		<div className="App">
+		<div className="registro">
 			<h1>Registro de Simuladores</h1>
 
 			<form onSubmit={(e) => e.preventDefault()}>
@@ -108,7 +108,7 @@ function Registro() {
 					setPublicId={setPublicId}
 					setUrl={setUrl}
 				/>
-				<div style={{ width: "800px" }}>
+				<div style={{ width: "200px" }}>
 					<AdvancedImage
 						style={{ maxWidth: "100%" }}
 						cldImg={myImage}
