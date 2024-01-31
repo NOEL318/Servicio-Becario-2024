@@ -17,8 +17,8 @@ app.get("/api/hi", async (req, res) => {
 });
 
 app.post("/api/post/newsimulador", async (req, res) => {
-	var info = req.body;
-	var insert = await mongodb.simuladores.insertOne(info);
+	var { datos } = req.body;
+	var insert = await mongodb.simuladores.insertOne(datos);
 	res.json(insert);
 });
 
