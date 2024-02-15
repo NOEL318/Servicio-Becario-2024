@@ -1,5 +1,5 @@
 import axios from "axios";
-var url = "";
+import { url } from "./hooksConfig";
 export const SendForm = (datos) => {
 	return axios.post(`${url}/api/post/newsimulador`, { datos });
 };
