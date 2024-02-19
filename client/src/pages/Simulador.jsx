@@ -65,9 +65,9 @@ export const Simulador = () => {
 						>
 							<FaTrash size={20} />
 						</button>
-						<button className="clone_button" onClick={Clone}>
+						{/* <button className="clone_button" onClick={Clone}>
 							<FaClone size={20} />
-						</button>
+						</button> */}
 					</div>
 					<div className="text">
 						<h3>Marca: {simulador.marca}</h3>

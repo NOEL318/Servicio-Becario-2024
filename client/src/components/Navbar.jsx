@@ -18,7 +18,6 @@ export const Navbar = ({ user }) => {
 					<li>
 						<Link to={"/Registro"}>Registro de Activos</Link>
 					</li>
-
 					{user && (
 						<li
 							data-tooltip-id="my-tooltip"
