@@ -3,7 +3,7 @@ const { ObjectId } = require("mongodb");
 
 module.exports = {
 	SignUp: async function ({ username, id, password }) {
-		const res = await mongodb.users.insertOne({ username, id, password, authorized: false });
+		const res = await mongodb.users.insertOne({ username, id, password, authorized: false, role: "read" });
 		if (res.acknowledged == true) {
 			const find = await mongodb.users.findOne({ _id: new ObjectId(res.insertedId) });
 			return find;
@@ -22,5 +22,23 @@ module.exports = {
 		} else {
 			return null;
 		}
+	},
+	GetAllUsers: async function () {
+		const res = await mongodb.users.find();
+		var x = await res.toArray();
+		if (x) {
+			for (let i = 0; i < x.length; i++) {
+				delete x[i].password;
+			}
+			return x;
+		}
+	},
+	updateUserR: async function (id, role) {
+		const res = await mongodb.users.findOneAndUpdate({ _id: new ObjectId(id) }, { $set: { role } });
+		return res;
+	},
+	deleteUser: async function (id) {
+		const res = await mongodb.users.deleteOne({ _id: new ObjectId(id) });
+		return res;
 	},
 };

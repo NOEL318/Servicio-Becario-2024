@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { loginwithoutpassword } from "./hooks/userSlice";
 import { Tooltip } from "react-tooltip";
+import { Admin } from "./pages/Admin";
 
 function App() {
 	const dispatch = useDispatch();
@@ -25,11 +26,17 @@ function App() {
 				<Routes>
 					<Route
 						path="/"
-						element={<Auth />}
+						element={!user && isSucces ? <Auth /> : <Catalogo />}
+					/>
+					<Route
+						path="/Admin-Panel"
+						element={user && isSucces ? user.role == "admin" ? <Admin user={user} /> : <Catalogo /> : <Auth />}
 					/>
 					<Route
 						path="/Registro"
-						element={user && isSucces ? <Registro /> : <Auth />}
+						element={
+							user && isSucces ? user.role == "admin" || user.role == "read-write" ? <Registro /> : <Catalogo /> : <Auth />
+						}
 					/>
 					<Route
 						path="/Catalogo"
@@ -37,7 +44,7 @@ function App() {
 					/>
 					<Route
 						path="/Simulador/:_id"
-						element={user && isSucces ? <Simulador /> : <Auth />}
+						element={user && isSucces ? <Simulador user={user} /> : <Auth />}
 					/>
 				</Routes>
 			</BrowserRouter>

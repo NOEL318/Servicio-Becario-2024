@@ -3,7 +3,8 @@ const mongodb = require("./mongodb_config");
 const path = require("path");
 const cors = require("cors");
 const { ObjectId } = require("mongodb");
-const { signUp, signIn, loginwithoutpassword } = require("./auth/auth");
+const { signUp, signIn, loginwithoutpassword, getUsers, updateUserRole, deleteUser } = require("./auth/auth");
+
 const app = express();
 require("dotenv").config();
 
@@ -21,6 +22,19 @@ app.get("/api/hi", async (req, res) => {
 app.post("/api/signup", async (req, res) => {
 	res.json(await signUp(req.body));
 });
+
+app.post("/api/getUsers", async (req, res) => {
+	res.json(await getUsers());
+});
+
+app.post("/api/updateUserRole", async (req, res) => {
+	res.json(await updateUserRole(req.body));
+});
+
+app.post("/api/deleteUser", async (req, res) => {
+	res.json(await deleteUser(req.body));
+});
+
 app.post("/api/signin", async (req, res) => {
 	res.json(await signIn(req.body));
 });

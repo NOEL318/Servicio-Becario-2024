@@ -8,10 +8,9 @@ export const Catalogo = () => {
 		const getData = async () => {
 			var { data } = await GetSimuladores();
 			setsimuladores(data);
-			console.log(data);
 		};
 		getData();
-	}, []);
+	}, [1]);
 
 	if (simuladores) {
 		return (

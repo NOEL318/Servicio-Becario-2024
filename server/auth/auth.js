@@ -11,9 +11,7 @@ module.exports = {
 			const salt = await bcrypt.genSalt(10);
 			var hash = await bcrypt.hash(password, salt);
 			var response = await Auth_Mongodb.SignUp({ username, id, password: hash });
-			delete response.password;
-			const token = jwt.sign(response, process.env.ENCODER_FOR_USER_TOKENS, { expiresIn: "3h" });
-			return { status: 200, token };
+			return { status: 401, token: null, error: "No estás autorizado para ingresar." };
 		}
 	},
 	signIn: async function ({ id, password }) {
@@ -48,6 +46,28 @@ module.exports = {
 			if (user == null) {
 				return { status: 400, message: "No tienes una cuenta" };
 			}
+		}
+	},
+
+	getUsers: async function () {
+		var users = await Auth_Mongodb.GetAllUsers();
+		return { status: 200, users };
+	},
+	updateUserRole: async function ({ id, role }) {
+		var user = await Auth_Mongodb.updateUserR(id, role);
+		if (user != null) {
+			return { status: 200 };
+		} else {
+			return { status: 401 };
+		}
+	},
+	deleteUser: async function ({ id }) {
+		var user = await Auth_Mongodb.deleteUser(id);
+		console.log(user);
+		if (user != null) {
+			return { status: 200, deletedCount: user.deletedCount };
+		} else {
+			return { status: 401 };
 		}
 	},
 };

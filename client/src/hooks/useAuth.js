@@ -63,6 +63,46 @@ export const loginwithoutpassword = async (user) => {
 	}
 };
 
+export const getUsers = async ({ id }) => {
+	const res = await axios.post(`${url}/api/getUsers`, { id });
+	if (res.status == 200 && res.data.status == 200) {
+		return res.data.users;
+	} else {
+		var { message, status } = res.data;
+		if (message || status != 200) {
+			window.alert(message);
+		}
+	}
+};
+
+export const updateUserRole = async ({ id, newrole }) => {
+	const res = await axios.post(`${url}/api/updateUserRole`, { id, role: newrole });
+	if (res.status == 200 && res.data.status == 200) {
+		console.log(res.data);
+		if (res.data.status == 200) {
+			window.alert("OK!");
+		}
+	} else {
+		var { message, status } = res.data;
+		if (message || status != 200) {
+			window.alert(message);
+		}
+	}
+};
+
+export const deleteUser = async ({ id }) => {
+	const res = await axios.post(`${url}/api/deleteUser`, { id });
+	if (res.status == 200 && res.data.status == 200) {
+		console.log(res.data);
+		return res;
+	} else {
+		var { message, status } = res.data;
+		if (message || status != 200) {
+			window.alert(message);
+		}
+	}
+};
+
 export const signout = async () => {
 	return localStorage.removeItem("user");
 };
@@ -72,5 +112,6 @@ const authServices = {
 	signin,
 	signout,
 	loginwithoutpassword,
+	getUsers,
 };
 export default authServices;

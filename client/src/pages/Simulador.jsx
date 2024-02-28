@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FaTrash, FaClone } from "react-icons/fa";
 import { Modal } from "../components/Modal";
 
-export const Simulador = () => {
+export const Simulador = ({ user }) => {
 	const { _id } = useParams();
 	const [showModal, setshowModal] = useState(false);
 	const [simulador, setsimulador] = useState();
@@ -41,7 +41,7 @@ export const Simulador = () => {
 		// }
 	};
 
-	if (simulador)
+	if (simulador && user) {
 		return (
 			<>
 				{showModal ? (
@@ -58,17 +58,20 @@ export const Simulador = () => {
 						src={simulador.image_url}
 						alt=""
 					/>
-					<div className="buttons">
-						<button
-							onClick={Delete}
-							className="delete_button"
-						>
-							<FaTrash size={20} />
-						</button>
-						{/* <button className="clone_button" onClick={Clone}>
+
+					{(user.role == "admin" || user.role == "read-write") && (
+						<div className="buttons">
+							<button
+								onClick={Delete}
+								className="delete_button"
+							>
+								<FaTrash size={20} />
+							</button>
+							{/* <button className="clone_button" onClick={Clone}>
 							<FaClone size={20} />
 						</button> */}
-					</div>
+						</div>
+					)}
 					<div className="text">
 						<h3>Marca: {simulador.marca}</h3>
 						<h3>Modelo: {simulador.modelo}</h3>
@@ -81,4 +84,5 @@ export const Simulador = () => {
 				</div>
 			</>
 		);
+	}
 };

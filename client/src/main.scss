@@ -274,3 +274,46 @@ form {
 		width: 100%;
 	}
 }
+
+.admin {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	width: 100%;
+	ul,
+	li {
+		list-style: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+	.side {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		select {
+			height: 35px !important;
+			padding: 0 10px;
+			border-radius: 8px;
+		}
+		button {
+			background-color: #ff5141;
+			color: #ffffff;
+			padding-top: 5px;
+			border: none;
+			border-radius: 8px;
+			margin-left: 10px;
+			height: 35px;
+			transition: all 0.3s;
+		}
+		button:hover {
+			scale: 1.05;
+			color: #a2a2a2;
+		}
+	}
+}
