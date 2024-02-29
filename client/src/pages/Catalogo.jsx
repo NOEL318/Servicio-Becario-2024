@@ -31,9 +31,9 @@ export const Catalogo = () => {
 								<div className="info">
 									<p className="field">Nombre: </p>
 									<p className="title">{simulador.nombre_maquina}</p>
-									<p className="field">Ubicación: </p>
-									<p className="location">{simulador.ubicacion}</p>
-									<p className="field">Activo Fijo:: </p>
+									{/* <p className="field">Ubicación: </p>
+									<p className="location">{simulador.ubicacion}</p> */}
+									<p className="field">Activo Fijo:</p>
 									<p>AF/{simulador.numero_activo_fijo}</p>
 									<p className="field">Marca: </p>
 									<p className="marca">{simulador.marca}</p>

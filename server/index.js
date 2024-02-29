@@ -43,32 +43,99 @@ app.post("/api/loginwithoutpassword", async (req, res) => {
 	res.json(await loginwithoutpassword(req.body));
 });
 
+// app.post("/api/post/newsimulador", async (req, res) => {
+// 	var { datos } = req.body;
+// 	var insert = await mongodb.simuladores.insertOne(datos);
+// 	res.json(insert);
+// });
+
 app.post("/api/post/newsimulador", async (req, res) => {
 	var { datos } = req.body;
-	var insert = await mongodb.simuladores.insertOne(datos);
+	var insert = await mongodb.backup.insertOne(datos);
 	res.json(insert);
 });
 
+
+// app.get("/api/get/simuladores", async (req, res) => {
+// 	var find = await mongodb.simuladores.find();
+// 	const array = await find.toArray();
+// 	res.json(array);
+// });
+
 app.get("/api/get/simuladores", async (req, res) => {
-	var find = await mongodb.simuladores.find();
+	var find = await mongodb.backup.find();
 	const array = await find.toArray();
 	res.json(array);
 });
+
+// app.post("/api/post/backupsimuladores", async (req, res) => {
+// 	var find = await mongodb.simuladores.find();
+// 	const array = await find.toArray();
+// 	await mongodb.backup.insertMany(array);
+// 	res.json(array);
+// });
+
+app.post("/api/post/insertonlyone", async (req, res) => {
+	var find = await mongodb.simuladores.find();
+	var array = await find.toArray();
+	const newarray = [];
+	var activos = [];
+
+	for (let i = 0; i < array.length; i++) {
+		const first = array[i];
+		for (let e = 0; e < array.length; e++) {
+			const second = array[e];
+			if (first.nombre_maquina == second.nombre_maquina) {
+				activos.push([second.numero_activo_fijo, second.ubicacion]);
+			}
+		}
+		var x = array.filter((elemento) => {
+			return first.nombre_maquina != elemento.nombre_maquina;
+		});
+		array = x;
+		first.numero_activo_fijo = activos;
+		first.cantidad = activos.length;
+		mongodb.backup.insertOne(first);
+		activos = [];
+	}
+	res.json(newarray);
+});
+
+// app.post("/api/post/simulador", async (req, res) => {
+// 	const { _id } = req.body;
+// 	var find = await mongodb.simuladores.findOne({ _id: new ObjectId(_id) });
+// 	res.json(find);
+// });
+
 app.post("/api/post/simulador", async (req, res) => {
 	const { _id } = req.body;
-	var find = await mongodb.simuladores.findOne({ _id: new ObjectId(_id) });
+	var find = await mongodb.backup.findOne({ _id: new ObjectId(_id) });
 	res.json(find);
 });
+
+// app.post("/api/delete/simulador", async (req, res) => {
+// 	const { _id } = req.body;
+// 	var find = await mongodb.simuladores.deleteOne({ _id: new ObjectId(_id) });
+// 	res.json(find);
+// });
 
 app.post("/api/delete/simulador", async (req, res) => {
 	const { _id } = req.body;
-	var find = await mongodb.simuladores.deleteOne({ _id: new ObjectId(_id) });
+	var find = await mongodb.backup.deleteOne({ _id: new ObjectId(_id) });
 	res.json(find);
 });
 
+// app.post("/api/post/duplicate_simulador", async (req, res) => {
+// 	const _id = req.body;
+// 	var original = await mongodb.simuladores.findOne({ _id: new ObjectId(_id) });
+// 	// var copy = await mongodb.simuladores.insertOne({});
+
+// 	res.json(find);
+// });
+
 app.post("/api/post/duplicate_simulador", async (req, res) => {
 	const _id = req.body;
-	var original = await mongodb.simuladores.findOne({ _id: new ObjectId(_id) });
+	var original = await mongodb.backup.findOne({ _id: new ObjectId(_id) });
 	// var copy = await mongodb.simuladores.insertOne({});
 
 	res.json(find);

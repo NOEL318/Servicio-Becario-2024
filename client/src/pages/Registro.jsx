@@ -36,11 +36,10 @@ function Registro() {
 	});
 
 	var form = {
-		numero_activo_fijo,
+		numero_activo_fijo: [numero_activo_fijo, ubicacion],
 		nombre_maquina,
 		modelo,
 		marca,
-		ubicacion,
 		caracteristicas,
 		image_url: Url,
 	};

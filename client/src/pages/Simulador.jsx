@@ -8,12 +8,13 @@ export const Simulador = ({ user }) => {
 	const { _id } = useParams();
 	const [showModal, setshowModal] = useState(false);
 	const [simulador, setsimulador] = useState();
+	const [activos, setactivos] = useState();
 	let navigate = useNavigate();
-
 	useEffect(() => {
 		const getData = async () => {
 			var { data } = await GetSimulador(_id);
 			setsimulador(data);
+			setactivos(data.numero_activo_fijo);
 		};
 		getData();
 	}, []);
@@ -41,7 +42,7 @@ export const Simulador = ({ user }) => {
 		// }
 	};
 
-	if (simulador && user) {
+	if (simulador && user && activos) {
 		return (
 			<>
 				{showModal ? (
@@ -75,9 +76,18 @@ export const Simulador = ({ user }) => {
 					<div className="text">
 						<h3>Marca: {simulador.marca}</h3>
 						<h3>Modelo: {simulador.modelo}</h3>
+						<h3>Cantidad: {simulador.cantidad}</h3>
 
-						<h4>No. Activo Fijo: AF/{simulador.numero_activo_fijo}</h4>
-						<h4>Ubicación: {simulador.ubicacion}</h4>
+						<h4>No. Activo Fijo y Ubicación</h4>
+						<ol>
+							{activos.map((activo) => {
+								return (
+									<li key={activo[0]}>
+										{(activo[0] == "" || activo[0] == null ? "Sin AF" : "AF/" + activo[0]) + " - " + activo[1]} <br />
+									</li>
+								);
+							})}
+						</ol>
 					</div>
 
 					<p className="caracteristicas">{simulador.caracteristicas}</p>

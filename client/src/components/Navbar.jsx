@@ -7,25 +7,26 @@ export const Navbar = ({ user }) => {
 	const logout = async () => {
 		dispatch(SignOut());
 	};
-	if (user)
-		return (
-			<>
-				<div className="navbar">
-					<ul>
-						<li>
-							<Link to={"/Catalogo"}>Catálogo</Link>
-						</li>
-						{(user.role == "admin" || user.role == "read-write") && (
-							<li>
-								<Link to={"/Registro"}>Registro de Activos</Link>
-							</li>
-						)}
-						{user.role == "admin" && (
-							<li>
-								<Link to={"/Admin-Panel"}>Panel de Administrador</Link>
-							</li>
-						)}
-						{user && (
+
+	return (
+		<>
+			<div className="navbar">
+				<ul>
+					<li>
+						<Link to={"/Catalogo"}>Catálogo</Link>
+					</li>
+					{user && (
+						<>
+							{(user.role == "admin" || user.role == "read-write") && (
+								<li>
+									<Link to={"/Registro"}>Registro de Activos</Link>
+								</li>
+							)}
+							{user.role == "admin" && (
+								<li>
+									<Link to={"/Admin-Panel"}>Panel de Administrador</Link>
+								</li>
+							)}
 							<li
 								data-tooltip-id="my-tooltip"
 								data-tooltip-content="Cerrar Sesión"
@@ -33,9 +34,10 @@ export const Navbar = ({ user }) => {
 							>
 								{user.username}
 							</li>
-						)}
-					</ul>
-				</div>
-			</>
-		);
+						</>
+					)}
+				</ul>
+			</div>
+		</>
+	);
 };

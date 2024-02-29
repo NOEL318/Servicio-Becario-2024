@@ -26,7 +26,7 @@ function App() {
 				<Routes>
 					<Route
 						path="/"
-						element={!user && isSucces ? <Auth /> : <Catalogo />}
+						element={<Auth />}
 					/>
 					<Route
 						path="/Admin-Panel"
