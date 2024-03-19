@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteUser, getUsers, updateUserRole } from "../hooks/useAuth";
+import { deleteUser, getUsers, updateUserRole, updateUserAuthorization } from "../hooks/useAuth";
 import { useSelector } from "react-redux";
 import { FaTrash } from "react-icons/fa";
 
@@ -20,6 +20,7 @@ export const Admin = () => {
 			window.alert("OK");
 		}
 	};
+
 	if (users)
 		return (
 			<>
@@ -30,11 +31,17 @@ export const Admin = () => {
 							const changeRole = async (newrole) => {
 								updateUserRole({ id: usr._id, newrole });
 							};
+							const changeAuthorization = async (authorized) => {
+								var authorization = authorized == "true" ? true : false;
+								updateUserAuthorization({ id: usr._id, authorization });
+							};
 							if (usr._id != user._id)
 								return (
 									<li key={usr._id}>
 										<h4>{usr.username}</h4>
 										<div className="side">
+											<p>Permisos:</p>
+
 											<select
 												name="role"
 												id=""
@@ -51,6 +58,18 @@ export const Admin = () => {
 											>
 												<FaTrash size={20} />
 											</button>
+										</div>
+										<div className="side">
+											<p>Autorizado:</p>
+											<select
+												name="authorization"
+												id=""
+												defaultValue={usr.authorized}
+												onChange={(e) => changeAuthorization(e.target.value)}
+											>
+												<option value="true">Si</option>
+												<option value="false">No</option>
+											</select>
 										</div>
 									</li>
 								);

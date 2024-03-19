@@ -5,11 +5,13 @@ import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 import { SendForm } from "../hooks/useSimuladores";
 
 function Registro() {
-	const [numero_activo_fijo, setnumero_activo_fijo] = useState();
+	const [inputList, setinputList] = useState([[]]);
+
 	const [nombre_maquina, setnombre_maquina] = useState();
 	const [modelo, setmodelo] = useState();
 	const [marca, setmarca] = useState();
 	const [ubicacion, setubicacion] = useState();
+	const [af, setaf] = useState();
 	const [caracteristicas, setcaracteristicas] = useState();
 
 	const [publicId, setPublicId] = useState("");
@@ -36,7 +38,7 @@ function Registro() {
 	});
 
 	var form = {
-		numero_activo_fijo: [numero_activo_fijo, ubicacion],
+		numero_activo_fijo: inputList,
 		nombre_maquina,
 		modelo,
 		marca,
@@ -60,16 +62,53 @@ function Registro() {
 
 	const myImage = cld.image(publicId);
 
+	const handleListAdd = () => {
+		setinputList([...inputList, []]);
+	};
+
+	const handleInputChange = (ac_fijo, index, ubic) => {
+		const newInputList = [...inputList];
+		newInputList[index][0] = ac_fijo;
+		newInputList[index][1] = ubic;
+		setinputList(newInputList);
+		console.log(inputList);
+	};
+
 	return (
 		<div className="registro">
 			<h1>Registro de Simuladores</h1>
 
 			<form onSubmit={(e) => e.preventDefault()}>
-				<input
-					type="text"
-					placeholder="No. Activo Fijo sin el AF/"
-					onChange={(e) => setnumero_activo_fijo(e.target.value)}
-				/>
+				{inputList.length > 0
+					? inputList.map((input, index) => {
+							return (
+								<div
+									key={index}
+									className="inputs2"
+								>
+									<input
+										type="text"
+										placeholder="Ubicación"
+										onChange={(e) => setubicacion(e.target.value)}
+									/>
+									<input
+										type="text"
+										placeholder="No. Activo Fijo sin el AF/"
+										onChange={(e) => setaf(e.target.value)}
+									/>
+									<button onClick={(event) => handleInputChange(af, index, ubicacion)}>Ok</button>
+								</div>
+							);
+					  })
+					: "No hay activos fijos"}
+				<ol>
+					{inputList.length >= 1
+						? inputList.map((input, index) => {
+								return input[0] != undefined && <li key={index}>{input[0] + " - " + input[1]}</li>;
+						  })
+						: "No hay activos fijos"}
+				</ol>
+				<button onClick={() => handleListAdd()}>+</button>
 				<br />
 				<input
 					type="text"
@@ -89,12 +128,7 @@ function Registro() {
 					onChange={(e) => setmarca(e.target.value)}
 				/>
 				<br />
-				<input
-					type="text"
-					placeholder="Ubicación"
-					onChange={(e) => setubicacion(e.target.value)}
-				/>
-				<br />
+
 				<textarea
 					type="text"
 					placeholder="Características"

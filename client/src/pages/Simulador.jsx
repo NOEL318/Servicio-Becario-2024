@@ -43,6 +43,7 @@ export const Simulador = ({ user }) => {
 	};
 
 	if (simulador && user && activos) {
+		console.log(activos, "assaas");
 		return (
 			<>
 				{showModal ? (
@@ -77,17 +78,21 @@ export const Simulador = ({ user }) => {
 						<h3>Marca: {simulador.marca}</h3>
 						<h3>Modelo: {simulador.modelo}</h3>
 						<h3>Cantidad: {simulador.cantidad}</h3>
+						{activos[0] != null && (
+							<>
+								<h4>No. Activo Fijo y Ubicación</h4>
 
-						<h4>No. Activo Fijo y Ubicación</h4>
-						<ol>
-							{activos.map((activo) => {
-								return (
-									<li key={activo[0]}>
-										{(activo[0] == "" || activo[0] == null ? "Sin AF" : "AF/" + activo[0]) + " - " + activo[1]} <br />
-									</li>
-								);
-							})}
-						</ol>
+								<ol>
+									{activos.map((activo, index) => {
+										return (
+											<li key={index}>
+												{(activo[0] == null || activo[0] == "" ? "Sin AF" : "AF/" + activo[0]) + " - " + activo[1]} <br />
+											</li>
+										);
+									})}
+								</ol>
+							</>
+						)}
 					</div>
 
 					<p className="caracteristicas">{simulador.caracteristicas}</p>

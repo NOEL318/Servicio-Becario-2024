@@ -37,6 +37,10 @@ module.exports = {
 		const res = await mongodb.users.findOneAndUpdate({ _id: new ObjectId(id) }, { $set: { role } });
 		return res;
 	},
+	updateUserAuthorization: async function (id, authorized) {
+		const res = await mongodb.users.findOneAndUpdate({ _id: new ObjectId(id) }, { $set: { authorized } });
+		return res;
+	},
 	deleteUser: async function (id) {
 		const res = await mongodb.users.deleteOne({ _id: new ObjectId(id) });
 		return res;

@@ -90,6 +90,22 @@ export const updateUserRole = async ({ id, newrole }) => {
 	}
 };
 
+
+export const updateUserAuthorization = async ({ id, authorization }) => {
+	const res = await axios.post(`${url}/api/updateUserAuthorization`, { id, authorized: authorization });
+	if (res.status == 200 && res.data.status == 200) {
+		console.log(res.data);
+		if (res.data.status == 200) {
+			window.alert("OK!");
+		}
+	} else {
+		var { message, status } = res.data;
+		if (message || status != 200) {
+			window.alert(message);
+		}
+	}
+};
+
 export const deleteUser = async ({ id }) => {
 	const res = await axios.post(`${url}/api/deleteUser`, { id });
 	if (res.status == 200 && res.data.status == 200) {

@@ -61,6 +61,14 @@ module.exports = {
 			return { status: 401 };
 		}
 	},
+	updateUserAuthorization: async function ({ id, authorized }) {
+		var user = await Auth_Mongodb.updateUserAuthorization(id, authorized);
+		if (user != null) {
+			return { status: 200 };
+		} else {
+			return { status: 401 };
+		}
+	},
 	deleteUser: async function ({ id }) {
 		var user = await Auth_Mongodb.deleteUser(id);
 		console.log(user);
