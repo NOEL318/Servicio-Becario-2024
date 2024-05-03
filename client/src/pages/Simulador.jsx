@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { DeleteSimulador, GetSimulador } from "../hooks/useSimuladores";
+import { DeleteSimulador, GetSimulador, updateAcf } from "../hooks/useSimuladores";
 import { useEffect, useState } from "react";
 import { FaTrash, FaClone } from "react-icons/fa";
 import { Modal } from "../components/Modal";
@@ -10,11 +10,16 @@ export const Simulador = ({ user }) => {
 	const [simulador, setsimulador] = useState();
 	const [activos, setactivos] = useState();
 	let navigate = useNavigate();
+	const [ubicacion, setubicacion] = useState();
+	const [af, setaf] = useState();
+	const [inputList, setinputList] = useState([[]]);
+	const [enabled, setenabled] = useState(true);
 	useEffect(() => {
 		const getData = async () => {
 			var { data } = await GetSimulador(_id);
 			setsimulador(data);
 			setactivos(data.numero_activo_fijo);
+			setinputList(data.numero_activo_fijo);
 		};
 		getData();
 	}, []);
@@ -32,18 +37,36 @@ export const Simulador = ({ user }) => {
 		}
 	};
 
-	const Clone = async () => {
-		setshowModal(true);
-		// var { data } = await CloneSimulador(_id);
-		// if (data.deletedCount == 1) {
-		// 	window.alert("OK");
-		// 	const path = "/Catalogo";
-		// 	routeChange(path);
-		// }
+	const updateAcfijos = async (_id, newInputList) => {
+		var { data } = await updateAcf(_id, newInputList);
+		if (data.acknowledged == true) {
+			window.alert("OK");
+		}
+	};
+
+	const handleListAdd = () => {
+		setinputList([...inputList, []]);
+		setenabled(false);
+	};
+
+	const handleInputChange = (ac_fijo, index, ubic) => {
+		
+		const newInputList = [...inputList];
+		newInputList[index][0] = ac_fijo;
+		newInputList[index][1] = ubic;
+		setinputList(newInputList);
+		updateAcfijos(simulador._id, newInputList);
+		setenabled(true);
+	};
+
+	const handleDeleteInput = (index) => {
+		const newArray = [...inputList];
+		newArray.splice(index, 1);
+		setinputList(newArray);
+		updateAcfijos(simulador._id, newArray);
 	};
 
 	if (simulador && user && activos) {
-		console.log(activos, "assaas");
 		return (
 			<>
 				{showModal ? (
@@ -69,9 +92,6 @@ export const Simulador = ({ user }) => {
 							>
 								<FaTrash size={20} />
 							</button>
-							{/* <button className="clone_button" onClick={Clone}>
-							<FaClone size={20} />
-						</button> */}
 						</div>
 					)}
 					<div className="text">
@@ -80,13 +100,47 @@ export const Simulador = ({ user }) => {
 						<h3>Cantidad: {simulador.cantidad}</h3>
 						{activos[0] != null && (
 							<>
-								<h4>No. Activo Fijo y Ubicación</h4>
+								<h4>No. Activo Fijo y Ubicación(Cualquier clic en "Ok" o "Eliminar" será irreversible)</h4>
 
 								<ol>
-									{activos.map((activo, index) => {
+									{inputList.map((activo, index) => {
 										return (
 											<li key={index}>
-												{(activo[0] == null || activo[0] == "" ? "Sin AF" : "AF/" + activo[0]) + " - " + activo[1]} <br />
+												AF/
+												<input
+													className="input"
+													type="text"
+													placeholder={activo[0] == null || activo[0] == "" ? "Sin AF" : activo[0]}
+													onChange={(e) => {
+														setaf(e.target.value);
+													}}
+												/>
+												Ubicación
+												<input
+													className="input"
+													type="text"
+													placeholder={activo[1]}
+													onChange={(e) => {
+														setubicacion(e.target.value);
+													}}
+												/>
+												{af && ubicacion && (
+													<button
+														className="ok"
+														onClick={(event) => handleInputChange(af, index, ubicacion)}
+														disabled={inputList[index][0] != activos[index][0] || inputList[index][1] != activos[index][1]}
+													>
+														Ok
+													</button>
+												)}
+												{inputList.length > 1 && (
+													<button
+														className="delete_button"
+														onClick={() => handleDeleteInput(index)}
+													>
+														Eliminar
+													</button>
+												)}
 											</li>
 										);
 									})}
@@ -94,6 +148,14 @@ export const Simulador = ({ user }) => {
 							</>
 						)}
 					</div>
+					{enabled && (
+						<button
+							className="button"
+							onClick={() => handleListAdd()}
+						>
+							+
+						</button>
+					)}
 
 					<p className="caracteristicas">{simulador.caracteristicas}</p>
 				</div>

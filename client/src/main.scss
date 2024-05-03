@@ -3,6 +3,7 @@ body {
 	padding-top: 44px;
 	overflow: scroll !important;
 	margin: 0;
+	transition: all 0.3s;
 }
 * {
 	font-family: "Montserrat", sans-serif !important;
@@ -16,6 +17,7 @@ body {
 	border: 2px solid #ff8400;
 	background-color: #ff8400;
 	transition: all 0.3s;
+	font-size: 19px;
 }
 .button:hover {
 	cursor: pointer;
@@ -222,21 +224,41 @@ form {
 		color: #ffffff;
 		margin: 10px;
 	}
-	.clone_button {
-		width: 64px;
-		height: 50px;
-		border: none;
-		border-radius: 7px;
-		background-color: #056300;
-		color: #ffffff;
-		margin: 10px;
-	}
+
 	.caracteristicas {
 		width: 50%;
 		text-align: justify;
 	}
 	.text {
 		width: 50%;
+	}
+	li {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		.input {
+			max-width: 800px;
+			margin: 10px;
+			width: 40%;
+			padding: 15px 0px 15px 10px;
+			border-radius: 7px;
+			border: 2px solid #000000;
+		}
+		.ok {
+			width: 64px;
+			height: 50px;
+			border: none;
+			border-radius: 7px;
+			background-color: #056300;
+			color: #ffffff;
+			margin: 10px;
+		}
+		.ok:disabled {
+			background-color: #05630083;
+			cursor: not-allowed;
+		}
 	}
 }
 

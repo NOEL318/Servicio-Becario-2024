@@ -16,6 +16,10 @@ export const DeleteSimulador = (_id) => {
 	return axios.post(`${url}/api/delete/simulador`, { _id });
 };
 
+export const updateAcf = (_id, numero_activo_fijo) => {
+	return axios.post(`${url}/api/post/editsimulador`, { _id, numero_activo_fijo });
+};
+
 export const DuplicateSimulador = (_id) => {
 	return axios.post(`${url}/api/post/duplicate_simulador`, { _id });
 };
