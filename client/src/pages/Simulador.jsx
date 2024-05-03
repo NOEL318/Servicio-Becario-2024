@@ -50,7 +50,6 @@ export const Simulador = ({ user }) => {
 	};
 
 	const handleInputChange = (ac_fijo, index, ubic) => {
-		
 		const newInputList = [...inputList];
 		newInputList[index][0] = ac_fijo;
 		newInputList[index][1] = ubic;
@@ -124,15 +123,12 @@ export const Simulador = ({ user }) => {
 														setubicacion(e.target.value);
 													}}
 												/>
-												{af && ubicacion && (
-													<button
-														className="ok"
-														onClick={(event) => handleInputChange(af, index, ubicacion)}
-														disabled={inputList[index][0] != activos[index][0] || inputList[index][1] != activos[index][1]}
-													>
-														Ok
-													</button>
-												)}
+												<button
+													className="ok"
+													onClick={(event) => handleInputChange(af, index, ubicacion)}
+												>
+													Ok
+												</button>
 												{inputList.length > 1 && (
 													<button
 														className="delete_button"
