@@ -54,13 +54,11 @@ app.post("/api/loginwithoutpassword", async (req, res) => {
 	res.json(await loginwithoutpassword(req.body));
 });
 
-
 app.post("/api/post/newsimulador", async (req, res) => {
 	var { datos } = req.body;
 	var insert = await mongodb.backup.insertOne(datos);
 	res.json(insert);
 });
-
 
 app.post("/api/post/editsimulador", async (req, res) => {
 	var { _id, numero_activo_fijo } = req.body;
@@ -74,54 +72,6 @@ app.get("/api/get/simuladores", async (req, res) => {
 	const array = await find.toArray();
 	res.json(array);
 });
-
-
-// app.post("/api/post/insertonlyone", async (req, res) => {
-// 	var find = await mongodb.simuladores.find();
-// 	var array = await find.toArray();
-// 	const newarray = [];
-// 	var activos = [];
-// 	for (let i = 0; i < array.length; i++) {
-// 		const first = array[i];
-// 		for (let e = 0; e < array.length; e++) {
-// 			var second = array[e];
-// 			if (first.nombre_maquina == second.nombre_maquina) {
-// 				if (typeof second.numero_activo_fijo === "string") {
-// 					if (first.modelo == second.modelo) {
-// 						if (second.numero_activo_fijo != "") {
-// 							activos.push([second.numero_activo_fijo, second.ubicacion]);
-// 						} else {
-// 							activos.push(["", second.ubicacion]);
-// 						}
-// 					}
-// 				} else if (first.modelo == second.modelo) {
-// 					activos.push(["", second.ubicacion]);
-// 				}
-// 			}
-// 		}
-// 		//delete used element
-// 		var x = array.filter((elemento) => {
-// 			return first.nombre_maquina != elemento.nombre_maquina;
-// 		});
-// 		first.numero_activo_fijo = activos;
-// 		first.cantidad = activos.length;
-// 		newarray.push(first);
-// 		activos = [];
-// 		// await mongodb.backup.insertOne(first);
-// 	}
-// 	var modelosVistos = {};
-// 	var resultado = newarray.filter((elemento) => {
-// 		// Verificamos si el modelo ya se ha visto antes
-// 		if (modelosVistos[elemento.modelo]) {
-// 			return false; // Si ya se ha visto, lo filtramos
-// 		}
-// 		// Si no se ha visto, lo marcamos como visto y lo mantenemos en el resultado
-// 		modelosVistos[elemento.modelo] = true;
-// 		return true;
-// 	});
-// 	await mongodb.backup.insertMany(resultado);
-// 	res.json({ array, modelosVistos, resultado });
-// });
 
 app.post("/api/post/simulador", async (req, res) => {
 	const { _id } = req.body;
