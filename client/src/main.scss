@@ -19,6 +19,49 @@ body {
   transition: all 0.3s;
   font-size: 19px;
 }
+.button.red {
+  background-color: #ff2e2e !important;
+  border: solid 2px #ff2e2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: auto;
+  padding: 10px;
+  svg {
+    margin-right: 10px;
+    font-size: 40px;
+  }
+}
+.replace_inventory {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 90px;
+  .button {
+    padding: 10px;
+    width: 100%;
+    margin: 10px;
+  }
+  .input {
+    width: calc(100% - 20px);
+  }
+  .input_replace {
+    background-color: #ff8c00;
+    color: #ffffff;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+  }
+  input[type="file"] {
+    display: none;
+  }
+}
+
 .button.small {
   width: 50px;
   display: flex;
@@ -26,6 +69,7 @@ body {
   align-items: center;
   font-size: 16px;
 }
+
 .button:hover {
   cursor: pointer;
   scale: 1.04;
@@ -143,19 +187,45 @@ form {
     width: 200px;
   }
 }
-
-.searchbar {
+.caracteristicas {
+  height: 200px !important;
+}
+.topbar {
   display: flex;
-  width: 100%;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
-  input {
-    margin: 5px;
-    width: 250px;
-    padding: 10px;
-    border-radius: 8px;
-    border: solid 1px #595959;
+  padding-top: 20px;
+  .excel_button {
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #056300 !important;
+      border: none;
+      font-size: 16px;
+      height: 40px;
+      padding: 5px 5px;
+      color: #ffffff;
+      svg {
+        font-size: 28px;
+        margin-right: 15px;
+      }
+    }
+  }
+
+  .searchbar {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    input {
+      margin: 5px;
+      width: 250px;
+      padding: 10px;
+      border-radius: 8px;
+      border: solid 1px #595959;
+    }
   }
 }
 .cards {

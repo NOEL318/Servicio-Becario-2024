@@ -2,14 +2,33 @@ import { useEffect, useState } from "react";
 import { GetSimuladores } from "../hooks/useSimuladores";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
+import { RiFileExcel2Line } from "react-icons/ri";
+import { CSVLink, CSVDownload } from "react-csv";
 
 export const Catalogo = () => {
   const [simuladores, setsimuladores] = useState([]);
   const [searches, setsearches] = useState();
+  const [excelfiledownloadable, setexcelfiledownloadable] = useState([]);
   useEffect(() => {
     const getData = async () => {
       var { data } = await GetSimuladores();
+      await data.map(({ caracteristicas }) => {
+        if (caracteristicas) {
+          caracteristicas = JSON.stringify(caracteristicas)
+            .replace(/\\n|\\|\\r/g, " ")
+            .replace(/"/g, "")
+            .replace(/\s+/g, " ")
+            .trim()
+            .toLowerCase();
+          // console.log(
+          //   caracteristicas,
+          //   "aaaaa\n ALV CORREGIDO: ",
+          //   JSON.stringify(caracteristicas).replace(/\\n|\\r/g, "")
+          // );
+        }
+      });
       setsimuladores(data);
+      await duplicateObjects(data);
     };
     getData();
   }, [1]);
@@ -38,20 +57,67 @@ export const Catalogo = () => {
         );
       }
     );
-
     setsearches(resultado);
   };
+
+  async function duplicateObjects(simuladores) {
+    let result = [];
+
+    simuladores.forEach(
+      ({
+        _id,
+        numero_activo_fijo,
+        nombre_maquina,
+        caracteristicas,
+        modelo,
+        marca,
+        image_url,
+        cantidad,
+      }) => {
+        numero_activo_fijo.forEach((numero) => {
+          result.push({
+            // ...item,
+            _id,
+            numero_activo_fijo: numero[0] || "",
+            ubicacion: numero[1] || "",
+            nombre_maquina: nombre_maquina || "",
+            caracteristicas: caracteristicas || "",
+            modelo: modelo || "",
+            marca: marca || "",
+            image_url: image_url || "",
+            cantidad: cantidad || 0,
+          });
+        });
+      }
+    );
+    await setexcelfiledownloadable(result);
+    return result;
+  }
 
   if (simuladores) {
     return (
       <>
-        <div className="searchbar">
-          <CiSearch />
-          <input
-            type="text"
-            placeholder="Buscar"
-            onChange={async (e) => await filter_data(e.target.value)}
-          ></input>
+        <div className="topbar">
+          <div className="searchbar">
+            <CiSearch />
+            <input
+              type="text"
+              placeholder="Buscar"
+              onChange={async (e) => await filter_data(e.target.value)}
+            ></input>
+          </div>
+          <div className="excel_button">
+            <CSVLink
+              data={excelfiledownloadable}
+              separator={";"}
+              enclosingCharacter='"'
+            >
+              <button className="button">
+                <RiFileExcel2Line />
+                Descargar Excel
+              </button>
+            </CSVLink>
+          </div>
         </div>
         {!searches && (
           <div className="cards">

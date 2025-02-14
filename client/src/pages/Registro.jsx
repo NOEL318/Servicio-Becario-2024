@@ -2,9 +2,10 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { useState } from "react";
 import CloudinaryUploadWidget from "../CloudinaryUploadWidget";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
+
 import { SendForm } from "../hooks/useSimuladores";
 import { FaPlus } from "react-icons/fa6";
-
+// import { cloudinary } from "https://media-library.cloudinary.com/global/all.js";
 function Registro() {
   const [inputList, setinputList] = useState([[]]);
 
@@ -35,7 +36,7 @@ function Registro() {
     // clientAllowedFormats: ["images"], //restrict uploading to image files only
     // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
     // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-    // theme: "purple", //change to a purple theme
+    // theme: "minimal", //change to a purple theme
   });
 
   var form = {
@@ -45,6 +46,7 @@ function Registro() {
     marca,
     caracteristicas,
     image_url: Url,
+    cantidad: inputList.length,
   };
   const callFormHook = async () => {
     var res = await SendForm(form);
@@ -56,9 +58,7 @@ function Registro() {
   };
 
   const cld = new Cloudinary({
-    cloud: {
-      cloudName,
-    },
+    cloudName,
   });
 
   const myImage = cld.image(publicId);
@@ -74,8 +74,8 @@ function Registro() {
     setinputList(newInputList);
     setaf("");
     setubicacion("");
-		handleListAdd();
-		console.log(inputList)
+    handleListAdd();
+    console.log(inputList);
   };
 
   return (
@@ -146,8 +146,14 @@ function Registro() {
 
         <textarea
           type="text"
+          className="caracteristicas"
           placeholder="Características"
-          onChange={(e) => setcaracteristicas(e.target.value)}
+          onChange={(e) => {
+            console.log(JSON.stringify(e.target.value));
+            setcaracteristicas(
+              JSON.stringify(e.target.value).replace(/\n/g, "")
+            );
+          }}
         />
 
         <br />
@@ -156,6 +162,7 @@ function Registro() {
           setPublicId={setPublicId}
           setUrl={setUrl}
         />
+
         <div style={{ width: "200px" }}>
           <AdvancedImage
             style={{ maxWidth: "100%" }}
