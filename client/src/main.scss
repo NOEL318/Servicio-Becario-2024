@@ -16,7 +16,7 @@ body {
   border-radius: 7px;
   border: 2px solid #ff8400;
   background-color: #ff8400;
-  transition: all 0.3s;
+  transition: all 0.15s;
   font-size: 19px;
 }
 .button.red {
@@ -33,6 +33,33 @@ body {
     margin-right: 10px;
     font-size: 40px;
   }
+}
+.search_button_select {
+  width: 300px;
+  padding: 7px;
+  margin: 5px;
+  border-radius: 8px;
+  border: none;
+  background-color: #ff8c00;
+  color: #ffffff;
+  img {
+    width: 50px;
+    margin-right: 5px;
+  }
+  svg {
+    font-size: 20px !important;
+  }
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  text-align: left;
+}
+.result_search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 .replace_inventory {
   display: flex;
@@ -94,11 +121,11 @@ body {
   .inputs2 {
     display: flex;
     flex-direction: row;
-    width: 500px;
+    width: 90%;
     align-items: center;
     justify-content: center;
     input {
-      width: 250px;
+      width: 200px;
       margin: 10px;
     }
     button {
@@ -107,6 +134,9 @@ body {
       width: 40px;
       height: 40px;
     }
+  }
+  input {
+    width: 350px;
   }
 }
 
@@ -117,22 +147,23 @@ body {
   top: 0;
   left: 0;
   background-color: #ff8400;
+  transition: all 0.3s;
   height: 44px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   ul {
     width: 100%;
     list-style: none;
     margin: 0;
+    margin-top: 10px;
     padding: 0;
     display: flex;
     justify-content: space-around;
     flex-direction: row;
     li {
-      transition: all 0.3s;
+      transition: all 0.15s;
       color: #ffffff;
-
       a {
         text-decoration: none;
         color: #ffffff;
@@ -143,8 +174,68 @@ body {
       scale: 1.1;
     }
   }
+  .button_burguer {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-right: 20px;
+    transition: all 0.15s;
+  }
+}
+@media (max-width: 1000px) {
+  .navbar ul {
+    display: none;
+  }
+  .navbar .dropdown_button {
+    display: initial;
+  }
+  .navbar.true {
+    background-color: #ff8c00c9;
+    backdrop-filter: blur(16px);
+    height: 100%;
+    align-items: center;
+    flex-direction: column-reverse;
+    ul {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 95% !important;
+      height: 100%;
+      li {
+        margin-top: 20px;
+        font-size: 25px;
+      }
+    }
+    .dropdown_button {
+      height: auto;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 100%;
+    }
+    .button_burguer {
+      font-size: 30px;
+    }
+  }
+  .navbar.false {
+    justify-content: flex-end;
+  }
+}
+@media (min-width: 1000px) {
+  .navbar .dropdown_button {
+    display: none;
+    height: 300px;
+  }
 }
 
+.tooltip {
+  position: absolute;
+  z-index: 99999 !important;
+}
 form {
   display: flex;
   justify-content: center;
@@ -153,18 +244,28 @@ form {
   width: 500px;
   input,
   textarea {
-    max-width: 800px;
-    margin: 10px 0;
+    max-width: 510px;
+    margin: 10px 0px 10px 0px;
     width: 100%;
-    padding: 15px 0px 15px 10px;
+    padding: 15px 7px 15px 7px;
     border-radius: 7px;
     border: 2px solid #000000;
   }
+  select {
+    max-width: 510px;
+    margin: 0px;
+    width: 120%;
+    padding: 15px 7px 15px 7px;
+    border-radius: 7px;
+    border: 2px solid #000000;
+  }
+
   textarea {
     height: 90px;
+    width: 350px;
   }
   .send_button {
-    width: 100%;
+    width: 370px;
     padding: 15px 5px;
     color: #ffffff;
     border-radius: 7px;
@@ -174,7 +275,7 @@ form {
   .cloudinary-button {
     margin: 10px 5px;
     padding: 15px 5px;
-    width: calc(100% + 13px);
+    width: 370px;
     border: none;
     border-radius: 7px;
     background-color: #047700 !important;
@@ -187,13 +288,12 @@ form {
     width: 200px;
   }
 }
-.caracteristicas {
-  height: 200px !important;
-}
+
 .topbar {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   padding-top: 20px;
   .excel_button {
     .button {
@@ -206,6 +306,7 @@ form {
       height: 40px;
       padding: 5px 5px;
       color: #ffffff;
+      margin: 20px;
       svg {
         font-size: 28px;
         margin-right: 15px;
@@ -313,7 +414,9 @@ form {
     border-radius: 7px;
     background-color: #ff5141;
     color: #ffffff;
-    margin: 10px;
+    margin: 7px;
+    margin-top: 30px;
+    min-width: 90px;
   }
 
   .caracteristicas {
@@ -323,6 +426,15 @@ form {
   .text {
     width: 50%;
   }
+  .agrouped_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  ol {
+    padding: 0;
+  }
   li {
     display: flex;
     justify-content: center;
@@ -331,24 +443,42 @@ form {
     flex-wrap: nowrap;
     .input {
       max-width: 800px;
-      margin: 10px;
+      min-width: 90px;
       width: 40%;
+      margin: 10px;
       padding: 15px 0px 15px 10px;
       border-radius: 7px;
       border: 2px solid #000000;
     }
     .ok {
-      width: 64px;
+      width: 84px;
+      min-width: 80px;
       height: 50px;
       border: none;
       border-radius: 7px;
       background-color: #056300;
       color: #ffffff;
-      margin: 10px;
+      margin: 7px;
+      margin-top: 30px;
     }
     .ok:disabled {
       background-color: #05630083;
       cursor: not-allowed;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .simulador {
+    img {
+      width: 90%;
+      border-radius: 20px;
+    }
+    .caracteristicas {
+      width: 90%;
+    }
+    .text {
+      width: 90%;
     }
   }
 }
@@ -360,19 +490,19 @@ form {
   align-items: center;
   flex-direction: column;
   width: 100%;
-  margin-top: -44px;
+  margin-top: 0px;
   flex-wrap: nowrap;
   min-height: 100vh;
   box-shadow: 0px 1px 24px 1px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px 1px 24px 1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 1px 24px 1px rgba(0, 0, 0, 0.75);
   justify-content: center;
-  position: fixed;
+  position: absolute;
   .header {
     background-color: #ffffff;
     border-radius: 16px 16px 0 0;
     width: 500px;
-    padding: 10px 10px 0 30px;
+    padding: 0px 10px 0 30px;
     height: 45px;
     display: flex;
     align-items: center;
@@ -385,6 +515,7 @@ form {
       transition: all 0.3s;
       width: 40px;
       height: 40px;
+      color: #000000;
     }
     .button:hover {
       scale: 1.09;
@@ -397,8 +528,13 @@ form {
     z-index: 90;
     padding: 0 20px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background-color: #ffffff;
     border-radius: 0 0 16px 16px;
+    padding-bottom: 25px;
   }
   & {
     width: 100%;
@@ -427,10 +563,9 @@ form {
     flex-direction: row;
     flex-wrap: nowrap;
     margin: 10px;
-
     select {
       height: 35px !important;
-      padding: 0 10px;
+      padding: 0 7px;
       border-radius: 8px;
     }
     button {
@@ -441,11 +576,28 @@ form {
       border-radius: 8px;
       margin-left: 10px;
       height: 35px;
-      transition: all 0.3s;
+      transition: all 0.15s;
     }
     button:hover {
       scale: 1.05;
       color: #a2a2a2;
+    }
+  }
+}
+.prestamos {
+  background: linear-gradient(180deg, #ff8400, transparent);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  .tabla_prestamos {
+    width: 90%;
+    td,
+    tr {
+      border-color: #000000;
+      border-width: 2px;
+      border-style: solid;
     }
   }
 }

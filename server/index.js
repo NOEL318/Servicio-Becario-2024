@@ -22,11 +22,12 @@ app.use(express.json({ limit: "50mb" }));
 const PORT = process.env.PORT || 5001;
 
 app.use(express.static(path.join(__dirname, "../client/build")));
-
+//Server test
 app.get("/api/hi", async (req, res) => {
   res.json({ message: "Hola desde el servidor!" });
 });
 
+//Users
 app.post("/api/signup", async (req, res) => {
   res.json(await signUp(req.body));
 });
@@ -53,7 +54,7 @@ app.post("/api/signin", async (req, res) => {
 app.post("/api/loginwithoutpassword", async (req, res) => {
   res.json(await loginwithoutpassword(req.body));
 });
-
+//Simuladores
 app.post("/api/post/newsimulador", async (req, res) => {
   var { datos } = req.body;
   var insert = await mongodb.backup.insertOne(datos);
@@ -80,19 +81,6 @@ app.post("/api/post/simulador", async (req, res) => {
   const { _id } = req.body;
   var find = await mongodb.backup.findOne({ _id: new ObjectId(_id) });
   res.json(find);
-});
-
-app.post("/api/post/replace_inventory", async (req, res) => {
-  const { datos } = req.body;
-  console.log(datos);
-  var data = JSON.parse(datos);
-  x = 0;
-  await data.forEach(async (element) => {
-    var find = await mongodb.newone.insertOne(element);
-    console.log(find + x++);
-  });
-  // var find = await mongodb.newone.insertMany(datos);
-  res.json("find");
 });
 
 app.post("/api/post/modify_inventory", async (req, res) => {
@@ -132,17 +120,44 @@ app.post("/api/post/modify_inventory", async (req, res) => {
     if (!element.cantidad) {
       element.cantidad = 0;
     }
-    var find = await mongodb.newone.insertOne(element);
+    var find = await mongodb.backup.insertOne(element);
     console.log(find, x++);
   });
-  // var find = await mongodb.newone.insertMany(datos);
   res.json("find");
 });
-
 
 app.post("/api/delete/simulador", async (req, res) => {
   const { _id } = req.body;
   var find = await mongodb.backup.deleteOne({ _id: new ObjectId(_id) });
+  res.json(find);
+});
+
+//Prestamos
+
+app.get("/api/get/prestamo", async (req, res) => {
+  var find = await mongodb.prestamo.find();
+  const array = await find.toArray();
+  res.json(array);
+});
+
+app.post("/api/post/new_prestamo", async (req, res) => {
+  var body = {
+    prestatario: {
+      _id: "aaaa999",
+      nombre_usuario: "Noel Rincón",
+    },
+    fecha_prestamo: "2025-02-17",
+    fecha_devolucion: "2025-02-19",
+    hora_prestamo: "1739836162",
+    hora_devolucion: "1739922562",
+    prestamista: { _id: "", nombre_usuario: "Noel Rincón" },
+    simuladores: [
+      ["_id", "Baby Anne", "000333"],
+      ["_id", "Tijeras Quirúrgicas", "000999"],
+    ],
+  };
+
+  var find = await mongodb.prestamo.insertOne(body);
   res.json(find);
 });
 

@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import Registro from "./pages/Registro";
 import { Catalogo } from "./pages/Catalogo";
+import { Prestamos } from "./pages/Prestamos";
 import { Simulador } from "./pages/Simulador";
 import { Auth } from "./pages/Auth";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +10,6 @@ import { useEffect } from "react";
 import { loginwithoutpassword } from "./hooks/userSlice";
 import { Tooltip } from "react-tooltip";
 import { Admin } from "./pages/Admin";
-import { Prestamos } from "./pages/Prestamos";
 
 function App() {
   const dispatch = useDispatch();

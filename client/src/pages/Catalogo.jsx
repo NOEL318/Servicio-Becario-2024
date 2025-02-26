@@ -20,11 +20,6 @@ export const Catalogo = () => {
             .replace(/\s+/g, " ")
             .trim()
             .toLowerCase();
-          // console.log(
-          //   caracteristicas,
-          //   "aaaaa\n ALV CORREGIDO: ",
-          //   JSON.stringify(caracteristicas).replace(/\\n|\\r/g, "")
-          // );
         }
       });
       setsimuladores(data);

@@ -29,55 +29,6 @@ export const Admin = () => {
     }
   };
 
-  const handleFile = (e) => {
-    Papa.parse(e.target.files[0], {
-      header: false,
-      skipEmptyLines: true,
-      complete: async function (result) {
-        // const valuesArray = [];
-        // result.data.map((d) => {
-
-        // 	var keys = {
-        // 		_id: d[0],
-        //     numero_activo_fijo: d[1],
-        //     ubicacion: d[2],
-        //     nombre_maquina: d[3],
-        //     caracteristicas: d[4],
-        //     modelo: d[5],
-        //     marca: d[6],
-        // 		image_url: d[7],
-        // 		cantidad: d[8],
-        // 		status:{ocupado: false, usuario: "", id: "", fecha_prestamo: date, fecha_devolucion: "", hora_prestamo: 0, hora_devolucion: 0 }
-        //   };
-        //   valuesArray.push(keys);
-        // });
-
-        let valuesArray = [];
-
-        result.data.map((d) => {
-          let existing = valuesArray.find((item) => item._id === d[0]);
-          if (existing) {
-            existing.numero_activo_fijo.push([d[1], d[2], {}]);
-          } else {
-            valuesArray.push({
-              _id: d[0],
-              numero_activo_fijo: [[d[1], d[2], {}]],
-              nombre_maquina: d[3],
-              caracteristicas: d[4],
-              modelo: d[5],
-              marca: d[6],
-              image_url: d[7],
-              cantidad: d[8],
-            });
-          }
-        });
-
-        console.log(valuesArray);
-        await Replace_Inventory(valuesArray);
-      },
-    });
-  };
-
   if (users)
     return (
       <>
@@ -132,23 +83,6 @@ export const Admin = () => {
                 );
             })}
           </ul>
-
-          {/* <h1>Opciones Administrativas</h1>
-          <div className="replace_inventory">
-            <label className="input_replace">
-              <input
-                className="input"
-                type="file"
-                accept=".csv"
-                onChange={(e) => handleFile(e)}
-              />
-              Subir Archivo
-            </label>
-            <button className="button red">
-              <TbExchange />
-              Reemplazar Inventario Actual
-            </button>
-          </div> */}
         </div>
       </>
     );

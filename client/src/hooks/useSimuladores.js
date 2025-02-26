@@ -1,13 +1,9 @@
 import axios from "axios";
 import { url } from "./hooksConfig";
+
+//Manejo básico de Simuladores
 export const SendForm = (datos) => {
   return axios.post(`${url}/api/post/newsimulador`, { datos });
-};
-
-export const Replace_Inventory = (datos) => {
-  return axios.post(`${url}/api/post/replace_inventory`, {
-    datos: JSON.stringify(datos),
-  });
 };
 
 export const GetSimuladores = () => {
@@ -33,7 +29,7 @@ export const DuplicateSimulador = (_id) => {
   return axios.post(`${url}/api/post/duplicate_simulador`, { _id });
 };
 
-export const GetPrestamos = (_id) => {
-  return axios.get(`${url}/api/get/Prestamos`);
+//Manejo de préstamos
+export const GetPrestamos = () => {
+  return axios.get(`${url}/api/get/prestamo`);
 };
-

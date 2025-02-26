@@ -2,10 +2,8 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { useState } from "react";
 import CloudinaryUploadWidget from "../CloudinaryUploadWidget";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
-
 import { SendForm } from "../hooks/useSimuladores";
 import { FaPlus } from "react-icons/fa6";
-// import { cloudinary } from "https://media-library.cloudinary.com/global/all.js";
 function Registro() {
   const [inputList, setinputList] = useState([[]]);
 
@@ -18,25 +16,13 @@ function Registro() {
   var nindex = null;
   const [publicId, setPublicId] = useState("");
   const [Url, setUrl] = useState();
-  // Replace with your own cloud name
   const [cloudName] = useState("dpql7keqk");
-  // Replace with your own upload preset
   const [uploadPreset] = useState("simuladores");
 
   const [uwConfig] = useState({
     cloudName,
     uploadPreset,
-    // cropping: true, //add a cropping step
-    // showAdvancedOptions: true,  //add advanced options (public_id and tag)
-    // sources: ["url"], // restrict the upload sources to URL and local files
-    // multiple: false,  //restrict upload to a single file
-    folder: "simuladores", //upload files to the specified folder
-    // tags: ["users", "profile"], //add the given tags to the uploaded files
-    // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
-    // clientAllowedFormats: ["images"], //restrict uploading to image files only
-    // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
-    // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-    // theme: "minimal", //change to a purple theme
+    folder: "simuladores",
   });
 
   var form = {

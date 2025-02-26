@@ -6,15 +6,13 @@ const client = new MongoClient(uri);
 const database = client.db("Simuladores");
 const simuladores = database.collection("Simuladores");
 const backup = database.collection("simuladores");
-const newone = database.collection("simuladores");
-
-// const backup = database.collection("prueba");
+const prestamo = database.collection("prestamo");
 
 const users = database.collection("users");
 
 module.exports = {
   simuladores,
   users,
-  newone,
+  prestamo,
   backup,
 };
