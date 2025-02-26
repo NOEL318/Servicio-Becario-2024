@@ -32,3 +32,8 @@ export const updateAcf = (_id, numero_activo_fijo) => {
 export const DuplicateSimulador = (_id) => {
   return axios.post(`${url}/api/post/duplicate_simulador`, { _id });
 };
+
+export const GetPrestamos = (_id) => {
+  return axios.get(`${url}/api/get/Prestamos`);
+};
+
